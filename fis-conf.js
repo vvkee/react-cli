@@ -122,15 +122,7 @@ fis.media('pro').match('*.{js,jsx}', {
     optimizer: fis.plugin('uglify-js'),
     moduleId: function (m, path) {
         return fis.util.md5(path)
-    }
-}).match('*.{css,less}', {
-    optimizer: fis.plugin('clean-css')
-}).match('*', {
-    domain : CONFIG.domain.cdn,
-    deploy: fis.plugin('http-push', {
-        receiver: CONFIG.deploy_qa.receiver,
-        to: CONFIG.deploy_qa.root
-    }),
+    },
     packager: fis.plugin('deps-pack', {
         // 第一步，将 /node_module 中的依赖项，打包成 static/vendors.js
         'static/vendors.js': [
@@ -154,6 +146,14 @@ fis.media('pro').match('*.{js,jsx}', {
         'static/base.css': '/resource/**.{less,css}',
         'static/main.css': '/modules/**.{less,css}'
     })
+}).match('*.{css,less}', {
+    optimizer: fis.plugin('clean-css')
+}).match('*', {
+    domain : CONFIG.domain.cdn,
+    deploy: fis.plugin('http-push', {
+        receiver: CONFIG.deploy_qa.receiver,
+        to: CONFIG.deploy_qa.root
+    })
 })
 
 
@@ -162,14 +162,7 @@ fis.media('pre').match('*.{js,jsx}', {
     optimizer: fis.plugin('uglify-js'),
     moduleId: function (m, path) {
         return fis.util.md5(path)
-    }
-}).match('*.{css, less}', {
-    optimizer: fis.plugin('clean-css')
-}).match('*', {
-    domain : null,
-    deploy: fis.plugin('local-deliver', {
-        to: CONFIG.deploy_local.root
-    }),
+    },
     packager: fis.plugin('deps-pack', {
         // 第一步，将 /node_module 中的依赖项，打包成 static/vendors.js
         'static/vendors.js': [
@@ -192,6 +185,13 @@ fis.media('pre').match('*.{js,jsx}', {
         // 在此打包 css，因为 fis.match('::packager' 配置的打包优先级更高
         'static/base.css': '/resource/**.{less,css}',
         'static/main.css': '/modules/**.{less,css}'
+    })
+}).match('*.{css, less}', {
+    optimizer: fis.plugin('clean-css')
+}).match('*', {
+    domain : null,
+    deploy: fis.plugin('local-deliver', {
+        to: CONFIG.deploy_local.root
     })
 })
 
