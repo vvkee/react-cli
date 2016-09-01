@@ -99,29 +99,6 @@ fis.match('::package', {
     spriter: fis.plugin('csssprites'),
     postpackager: fis.plugin('loader', {
         useInlineMap: true
-    }),
-    packager: fis.plugin('deps-pack', {
-        // 第一步，将 /node_module 中的依赖项，打包成 static/vendors.js
-        'static/vendors.js': [
-            '/modules/main.jsx:deps',
-            '!/modules/**'
-        ],
-        // 第二步，将 /app 中的依赖项，打包成 static/main.js
-        'static/main/app.js': [
-            '/modules/main.jsx',
-            '/modules/main.jsx:deps'
-        ],
-
-        // ---------上面是按需打包js文件---------
-
-        // 将几个直接以<script>方式引用到 html 中的 js 文件（例如 fastclick.js、mod.js、百度统计的js等）打包成一个 lib.js ，减少http请求
-        // js工具包，一般单独放在 resource 文件夹下面
-        'static/libs.js': '/resource/**.js',
-
-        // 将所有的less、css，都打包成一个css文件
-        // 在此打包 css，因为 fis.match('::packager' 配置的打包优先级更高
-        'static/base.css': '/resource/**.{less,css}',
-        'static/main.css': '/modules/**.{less,css}'
     })
 })
 
@@ -153,6 +130,29 @@ fis.media('pro').match('*.{js,jsx}', {
     deploy: fis.plugin('http-push', {
         receiver: CONFIG.deploy_qa.receiver,
         to: CONFIG.deploy_qa.root
+    }),
+    packager: fis.plugin('deps-pack', {
+        // 第一步，将 /node_module 中的依赖项，打包成 static/vendors.js
+        'static/vendors.js': [
+            '/modules/main.jsx:deps',
+            '!/modules/**'
+        ],
+        // 第二步，将 /app 中的依赖项，打包成 static/main.js
+        'static/main/app.js': [
+            '/modules/main.jsx',
+            '/modules/main.jsx:deps'
+        ],
+
+        // ---------上面是按需打包js文件---------
+
+        // 将几个直接以<script>方式引用到 html 中的 js 文件（例如 fastclick.js、mod.js、百度统计的js等）打包成一个 lib.js ，减少http请求
+        // js工具包，一般单独放在 resource 文件夹下面
+        'static/libs.js': '/resource/**.js',
+
+        // 将所有的less、css，都打包成一个css文件
+        // 在此打包 css，因为 fis.match('::packager' 配置的打包优先级更高
+        'static/base.css': '/resource/**.{less,css}',
+        'static/main.css': '/modules/**.{less,css}'
     })
 })
 
@@ -169,6 +169,29 @@ fis.media('pre').match('*.{js,jsx}', {
     domain : null,
     deploy: fis.plugin('local-deliver', {
         to: CONFIG.deploy_local.root
+    }),
+    packager: fis.plugin('deps-pack', {
+        // 第一步，将 /node_module 中的依赖项，打包成 static/vendors.js
+        'static/vendors.js': [
+            '/modules/main.jsx:deps',
+            '!/modules/**'
+        ],
+        // 第二步，将 /app 中的依赖项，打包成 static/main.js
+        'static/main/app.js': [
+            '/modules/main.jsx',
+            '/modules/main.jsx:deps'
+        ],
+
+        // ---------上面是按需打包js文件---------
+
+        // 将几个直接以<script>方式引用到 html 中的 js 文件（例如 fastclick.js、mod.js、百度统计的js等）打包成一个 lib.js ，减少http请求
+        // js工具包，一般单独放在 resource 文件夹下面
+        'static/libs.js': '/resource/**.js',
+
+        // 将所有的less、css，都打包成一个css文件
+        // 在此打包 css，因为 fis.match('::packager' 配置的打包优先级更高
+        'static/base.css': '/resource/**.{less,css}',
+        'static/main.css': '/modules/**.{less,css}'
     })
 })
 
