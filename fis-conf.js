@@ -1,5 +1,5 @@
 /*
- * www.56hello.com
+ * fis config
  */
 fis.set('project.files', '/index.html'); // 按需编译。
 // static目录
@@ -182,12 +182,12 @@ fis.media('pre').match('*.{js,jsx}', {
         // ---------上面是按需打包js文件---------
 
         // 将几个直接以<script>方式引用到 html 中的 js 文件（例如 fastclick.js、mod.js、百度统计的js等）打包成一个 lib.js ，减少http请求
-        // js工具包，一般单独放在 resource 文件夹下面
-        'static/libs.js': '/resource/**.js',
+        // js工具包，一般单独放在 resources 文件夹下面
+        'static/libs.js': '/resources/**.js',
 
         // 将所有的less、css，都打包成一个css文件
         // 在此打包 css，因为 fis.match('::packager' 配置的打包优先级更高
-        'static/base.css': '/resource/**.{less,css}',
+        'static/base.css': '/resources/**.{less,css}',
         'static/main.css': '/modules/**.{less,css}'
     })
 }).match('*', {
