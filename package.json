@@ -4,11 +4,11 @@
   "description": "webapp react",
   "main": "fis-conf.js",
   "scripts": {
-    "dev": "npm install --registry=https://registry.npm.taobao.org && fis3 release staging -w",
-    "staging": "npm install --registry=https://registry.npm.taobao.org && fis3 release staging",
-    "pre": "npm install --registry=https://registry.npm.taobao.org && fis3 release pre",
-    "pro": "npm install --registry=https://registry.npm.taobao.org && fis3 release pro",
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "dev": "npm install --registry=https://registry.npm.taobao.org && fis3 release staging -cw",
+      "staging": "npm install --registry=https://registry.npm.taobao.org && fis3 release staging -c",
+      "pre": "npm install --registry=https://registry.npm.taobao.org && fis3 release pre -c",
+      "pro": "npm install --registry=https://registry.npm.taobao.org && fis3 release pro -c",
+      "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "weizongqi",
   "license": "ISC",

@@ -12,15 +12,15 @@ var CONFIG = {
     // QA 测试部署路径
     deploy_qa: {
         receiver : '',
-        root : '/Users/nico/56hello/fronted/rebulit/server/'
+        root : '/Users/nico/56hello/fronted/rebulit/server'
     },
     // 本地测试部署路径
     deploy_local: {
-        root : '/Users/nico/56hello/fronted/rebulit/server/'
+        root : '/Users/nico/56hello/fronted/rebulit/server'
     },
     // 线上环境部署路径
     production: {
-        root : '/Users/nico/56hello/fronted/rebulit/server/'
+        root : '/Users/nico/56hello/fronted/rebulit/server'
     },
     // 发布domain
     domain : {
@@ -122,7 +122,8 @@ fis.media('pro').match('*.{js,jsx}', {
     optimizer: fis.plugin('uglify-js'),
     moduleId: function (m, path) {
         return fis.util.md5(path)
-    },
+    }
+}).match('::packager', {
     packager: fis.plugin('deps-pack', {
         // 第一步，将 /node_module 中的依赖项，打包成 static/vendors.js
         'static/vendors.js': [
@@ -162,7 +163,10 @@ fis.media('pre').match('*.{js,jsx}', {
     optimizer: fis.plugin('uglify-js'),
     moduleId: function (m, path) {
         return fis.util.md5(path)
-    },
+    }
+}).match('*.{css, less}', {
+    optimizer: fis.plugin('clean-css')
+}).match('::packager', {
     packager: fis.plugin('deps-pack', {
         // 第一步，将 /node_module 中的依赖项，打包成 static/vendors.js
         'static/vendors.js': [
@@ -186,8 +190,6 @@ fis.media('pre').match('*.{js,jsx}', {
         'static/base.css': '/resource/**.{less,css}',
         'static/main.css': '/modules/**.{less,css}'
     })
-}).match('*.{css, less}', {
-    optimizer: fis.plugin('clean-css')
 }).match('*', {
     domain : null,
     deploy: fis.plugin('local-deliver', {
@@ -201,5 +203,8 @@ fis.media('staging').match('*', {
     useSprite: false,
     useHash: false,
     packTo : null,
-    domain : null
+    domain : null,
+    deploy: fis.plugin('local-deliver', {
+        to: CONFIG.deploy_local.root
+    })
 })
